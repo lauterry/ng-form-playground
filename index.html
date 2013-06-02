@@ -10,54 +10,53 @@
 </head>
 <body class="container" ng-controller="formController">
 
-    <form novalidate class="form-horizontal span4" name="myForm">
+    <form novalidate class="form-horizontal span4" name="myForm" ng-submit="add(user)">
 
         <div class="page-header">
-            <h3>Formulaire d'inscription</h3>
+            <h3>Formulaire de réservation</h3>
         </div>
 
         <fieldset>
 
         <div>
-            <label>Pseudo</label>
-            <input name="pseudo" type="text" ng-model="user.pseudo">
+            <label>Nom et Prénom</label>
+            <input name="fullname" type="text" ng-model="user.fullname" required>
             <p class="help-block"></p>
         </div>
 
         <div>
             <label>Email</label>
-            <input name="email" type="email" ng-model="user.email">
+            <input name="email" type="email" ng-model="user.email" required>
             <p class="help-block"></p>
         </div>
-
 
         <div>
             <label>Confirmez email</label>
-            <input name="email" type="email" ng-model="user.email2">
+            <input name="email" type="email" ng-model="user.email2" required>
             <p class="help-block"></p>
         </div>
 
         <div>
-            <label>Date de naissance</label>
-            <input  name="birthday" type="date" ng-model="user.birthday">
+            <label>Date d'arrivée</label>
+            <input  name="arrival" type="date" ng-model="user.arrival">
             <p class="help-block"></p>
         </div>
 
         <div>
-            <label>Site</label>
-            <input name="site" type="url" ng-model="user.site">
+            <label>Nombre de nuits (99 € la nuit)</label>
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum">
             <p class="help-block"></p>
         </div>
 
         <div>
-            <label>Cotisations</label>
-            <input name="amount" type="number" ng-model="user.amount">
+            <label>Code promotion</label>
+            <input name="promocode" type="text" ng-model="user.promocode">
             <p class="help-block"></p>
         </div>
 
         <footer class="form-actions">
             <button class="btn btn-danger btn-small">Annuler</button>
-            <button class="btn btn-success" ng-click="add(user)" >Valider</button>
+            <input type="submit" class="btn btn-success" value="Valider">
         </footer>
 
         </fieldset>
@@ -72,18 +71,20 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Pseudo</th>
+                <th>Nom et Prénom</th>
                 <th>Email</th>
-                <th>Date de naissance</th>
-                <th>Cotisations</th>
+                <th>Date d'arrivée</th>
+                <th>Nombre de nuits</th>
+                <th>Total</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="user in users">
-                <td>{{user.pseudo}}</td>
+                <td>{{user.fullname}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.birthday}}</td>
-                <td>{{user.amount}}</td>
+                <td>{{user.arrival}}</td>
+                <td>{{user.night}}</td>
+                <td>?</td>
             </tr>
             </tbody>
         </table>
