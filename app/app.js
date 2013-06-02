@@ -4,8 +4,6 @@ formApp.controller('formController', function($scope){
 
     $scope.users = [];
 
-    $scope.show = true;
-
     $scope.confirm = function(user){
         $scope.users.push(user);
         // only available from angularjs 1.1.1
