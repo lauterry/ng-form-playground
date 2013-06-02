@@ -8,46 +8,48 @@
     <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
     <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body class="container" ng-controller="formController">
+<body class="container-fluid" ng-controller="formController">
 
-    <form class="span4" name="myForm" ng-submit="confirm(user)">
+<section class="row-fluid">
+
+    <form class="form-horizontal span5 offset1" name="myForm" ng-submit="confirm(user)">
 
         <header class="page-header">
             <h3>Formulaire de réservation</h3>
         </header>
 
-        <div>
-            <label>Nom et Prénom</label>
-            <input name="fullname" type="text" ng-model="user.fullname">
+        <div class="control-group">
+            <label class="control-label">Nom et Prénom</label>
+            <input name="fullname" type="text" ng-model="user.fullname" required>
             <p class="help-block"></p>
         </div>
 
-        <div>
-            <label>Email</label>
-            <input name="email" type="email" ng-model="user.email">
+        <div class="control-group">
+            <label class="control-label">Email</label>
+            <input name="email" type="email" ng-model="user.email" required>
             <p class="help-block"></p>
         </div>
 
-        <div>
-            <label>Confirmez email</label>
-            <input name="email" type="email" ng-model="user.email2">
+        <div class="control-group">
+            <label class="control-label">Confirmez email</label>
+            <input name="email" type="email" ng-model="user.email2" required>
             <p class="help-block"></p>
         </div>
 
-        <div>
-            <label>Date d'arrivée</label>
-            <input  name="arrival" type="date" ng-model="user.arrival">
+        <div class="control-group">
+            <label class="control-label">Date d'arrivée</label>
+            <input  name="arrival" type="date" ng-model="user.arrival" required>
             <p class="help-block"></p>
         </div>
 
-        <div>
-            <label>Nombre de nuits (99 € la nuit)</label>
-            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum">
-            <p class="help-block"></p>
+        <div class="control-group">
+            <label class="control-label">Nombre de nuits</label>
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="0" max="5">
+            <p class="help-block">99 € par nuit et par chambre</p>
         </div>
 
-        <div>
-            <label>Code promotion</label>
+        <div class="control-group">
+            <label class="control-label">Code promotion</label>
             <input name="promocode" type="text" ng-model="user.promocode">
             <p class="help-block"></p>
         </div>
@@ -59,9 +61,7 @@
 
     </form>
 
-
-
-    <section class="span6 offset1">
+    <section class="span5">
         <header class="page-header">
             <h3>Liste des inscrits <small>{{users.length}}</small></h3>
         </header>
@@ -86,6 +86,8 @@
             </tbody>
         </table>
     </section>
+
+</section>
 
 <script type="text/javascript" src="app/lib/angular.js"></script>
 <script type="text/javascript" src="app/app.js"></script>

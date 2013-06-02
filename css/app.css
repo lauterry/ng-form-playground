@@ -1,3 +1,15 @@
 body {
-    padding-top: 40px;
+    padding-top: 30px;
+}
+
+a:hover{
+    cursor: pointer
+}
+
+.control-group input,.control-group textarea  {
+    margin-left: 20px;
+}
+
+.control-group .help-block {
+    margin-left: 180px;
 }
