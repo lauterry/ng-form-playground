@@ -40,7 +40,7 @@
 
         <div class="control-group">
             <label class="control-label">Nombre de nuits *</label>
-            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="0" max="5">
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="0" max="5" ng-change="calculate(user.night)">
         </div>
 
         <div class="control-group">
@@ -50,7 +50,7 @@
 
         <div class="control-group">
             <label class="control-label"><strong>Prix : </strong></label>
-            <div ng-show="user.night">{{55.65 * user.night}}</div>
+            <div ng-show="user.night">{{user.total}}</div>
         </div>
 
         <footer class="form-actions">
@@ -69,11 +69,11 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Nom et Prénom</th>
-                <th>Email</th>
-                <th>Date d'arrivée</th>
-                <th>Nombre de nuits</th>
-                <th>Total</th>
+                <th><a>Nom et Prénom</a></th>
+                <th><a>Email</a></th>
+                <th><a>Date d'arrivée</a></th>
+                <th><a>Nombre de nuits</a></th>
+                <th><a>Total</a></th>
             </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@
                 <td>{{user.email}}</td>
                 <td>{{user.arrival}}</td>
                 <td>{{user.night}}</td>
-                <td>{{55.65 * user.night}}</td>
+                <td>{{user.total}}</td>
             </tr>
             </tbody>
         </table>
