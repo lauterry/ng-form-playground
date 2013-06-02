@@ -19,45 +19,46 @@
         </header>
 
         <div class="control-group">
-            <label class="control-label">Nom et Prénom</label>
+            <label class="control-label">Nom et Prénom *</label>
             <input name="fullname" type="text" ng-model="user.fullname" required>
-            <p class="help-block"></p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Email</label>
+            <label class="control-label">Email *</label>
             <input name="email" type="email" ng-model="user.email" required>
-            <p class="help-block"></p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Confirmez email</label>
+            <label class="control-label">Confirmez email *</label>
             <input name="email" type="email" ng-model="user.email2" required>
-            <p class="help-block"></p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Date d'arrivée</label>
+            <label class="control-label">Date d'arrivée *</label>
             <input  name="arrival" type="date" ng-model="user.arrival" placeholder="jj/mm/aaaa" required>
-            <p class="help-block"></p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Nombre de nuits</label>
+            <label class="control-label">Nombre de nuits *</label>
             <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="0" max="5">
-            <p class="help-block">99 € par nuit et par chambre</p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Code promotion</label>
-            <input name="promocode" type="text" ng-model="user.promocode">
-            <p class="help-block"></p>
+            <label class="control-label">Commentaires</label>
+            <textarea name="comment" type="text" ng-model="user.comment"></textarea>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label"><strong>Prix : </strong></label>
+            <div ng-show="user.night">{{55.65 * user.night}}</div>
         </div>
 
         <footer class="form-actions">
             <input type="reset" class="btn btn-danger btn-small" value="Réinitialiser">
             <input type="submit" class="btn btn-success" value="Valider">
         </footer>
+
+        <p>* requis</p>
 
     </form>
 
