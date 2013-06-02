@@ -45,7 +45,7 @@
 
         <div class="control-group" ng-class="{error: myForm.night.$error.min || myForm.night.$error.max }">
             <label class="control-label">Nombre de nuits * <p>55.65 € par nuit</p></label>
-            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required>
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required ng-change="calculate">
             <p class="help-block" ng-show="myForm.night.$error.min">Vous devez réserver au moins une nuit</p>
             <p class="help-block" ng-show="myForm.night.$error.max">Vous ne pouvez pas réserver plus de 5 nuits</p>
         </div>
@@ -58,7 +58,7 @@
 
         <div class="control-group">
             <label class="control-label"><strong>Prix : </strong></label>
-            <div ng-show="user.night">{{55.65 * user.night}}</div>
+            <div ng-show="user.night">{{user.total}}</div>
         </div>
 
         <footer class="form-actions">
@@ -76,23 +76,26 @@
         <header class="page-header">
             <h3>Liste des inscrits <small>{{users.length}}</small></h3>
         </header>
+
+        <input class="span5" type="text" placeholder="Rechercher" ng-model="search">
+
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Nom et Prénom</th>
-                <th>Email</th>
-                <th>Date d'arrivée</th>
-                <th>Nombre de nuits</th>
-                <th>Total</th>
+                <th><a ng-click="tri = 'fullname'; reverse = !reverse">Nom et Prénom</a></th>
+                <th><a ng-click="tri = 'email'; reverse = !reverse">Email</a></th>
+                <th><a ng-click="tri = 'arrival'; reverse = !reverse">Date d'arrivée</a></th>
+                <th><a ng-click="tri = 'night'; reverse = !reverse">Nombre de nuits</a></th>
+                <th><a ng-click="tri = 'total'; reverse = !reverse">Total</a></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in users">
+            <tr ng-repeat="user in users | filter:search | orderBy:tri:reverse">
                 <td>{{user.fullname}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.arrival}}</td>
-                <td>{{user.night}}</td>
-                <td>{{55.65 * user.night}}</td>
+                <td>{{user.arrival | date:'mediumDate'}}</td>
+                <td>{{user.night | moon}}</td>
+                <td>{{user.total | currency}}</td>
             </tr>
             </tbody>
         </table>
