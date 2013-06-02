@@ -10,8 +10,7 @@
 </head>
 <body class="container" ng-controller="formController">
 
-
-    <form novalidate class="form-horizontal span4">
+    <form novalidate class="form-horizontal span4" name="myForm">
 
         <div class="page-header">
             <h3>Formulaire d'inscription</h3>
@@ -33,8 +32,8 @@
 
 
         <div>
-            <label>Email</label>
-            <input name="email" type="email" ng-model="user.email">
+            <label>Confirmez email</label>
+            <input name="email" type="email" ng-model="user.email2">
             <p class="help-block"></p>
         </div>
 
@@ -58,11 +57,13 @@
 
         <footer class="form-actions">
             <button class="btn btn-danger btn-small">Annuler</button>
-            <button class="btn btn-success" ng-click="add(user)" ng-disabled="movieForm.$invalid">Valider</button>
+            <button class="btn btn-success" ng-click="add(user)" >Valider</button>
         </footer>
 
         </fieldset>
     </form>
+
+
 
     <section class="span6 offset1">
         <header class="page-header">
