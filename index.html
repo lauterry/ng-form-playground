@@ -12,54 +12,65 @@
 
 <section class="row-fluid">
 
-    <form class="form-horizontal span5 offset1" name="myForm" ng-submit="confirm(user)">
+    <form novalidate class="form-horizontal span5 offset1" name="myForm" ng-submit="confirm(user)">
 
         <header class="page-header">
             <h3>Formulaire de réservation</h3>
         </header>
 
-        <div class="control-group">
-            <label class="control-label">Nom et Prénom</label>
+        <div class="control-group" ng-class="{error : myForm.fullname.$dirty && myForm.fullname.$error.required, success : myForm.fullname.$valid}">
+            <label class="control-label">Nom et Prénom *</label>
             <input name="fullname" type="text" ng-model="user.fullname" required>
-            <p class="help-block"></p>
+            <p class="help-block" ng-show="myForm.fullname.$dirty && myForm.fullname.$error.required">Le nom complet est requis</p>
         </div>
 
-        <div class="control-group">
-            <label class="control-label">Email</label>
+        <div class="control-group" ng-class="{error : (myForm.email.$dirty && myForm.email.$error.email), success : myForm.email.$valid}">
+            <label class="control-label">Email *</label>
             <input name="email" type="email" ng-model="user.email" required>
-            <p class="help-block"></p>
+            <p class="help-block" ng-show="myForm.email.$error.email">Le format de votre email n'est pas valide</p>
+            <p class="help-block" ng-show=" myForm.email.$dirty && myForm.email.$error.required">Votre email est requis</p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Confirmez email</label>
+            <label class="control-label">Confirmez email *</label>
             <input name="email" type="email" ng-model="user.email2" required>
             <p class="help-block"></p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Date d'arrivée</label>
+            <label class="control-label">Date d'arrivée *</label>
             <input  name="arrival" type="date" ng-model="user.arrival" placeholder="jj/mm/aaaa" required>
             <p class="help-block"></p>
         </div>
 
-        <div class="control-group">
-            <label class="control-label">Nombre de nuits</label>
-            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="0" max="5">
-            <p class="help-block">99 € par nuit et par chambre</p>
+        <div class="control-group" ng-class="{error: myForm.night.$error.min || myForm.night.$error.max }">
+            <label class="control-label">Nombre de nuits * <p>55.65 € par nuit</p></label>
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required>
+            <p class="help-block" ng-show="myForm.night.$error.min">Vous devez réserver au moins une nuit</p>
+            <p class="help-block" ng-show="myForm.night.$error.max">Vous ne pouvez pas réserver plus de 5 nuits</p>
+        </div>
+
+        <div class="control-group" ng-class="{error : myForm.promocode.$error.maxlength}">
+            <label class="control-label">Commentaires</label>
+            <textarea name="promocode" type="text" ng-model="user.promocode" ng-maxlength="10"></textarea>
+            <p class="help-block" ng-show="myForm.promocode.$error.maxlength">Votre commentaire doit comporter moins de 50 caractères</p>
         </div>
 
         <div class="control-group">
-            <label class="control-label">Code promotion</label>
-            <input name="promocode" type="text" ng-model="user.promocode">
-            <p class="help-block"></p>
+            <label class="control-label"><strong>Prix : </strong></label>
+            <div ng-show="user.night">{{55.65 * user.night}}</div>
         </div>
 
         <footer class="form-actions">
             <input type="reset" class="btn btn-danger btn-small" value="Réinitialiser">
-            <input type="submit" class="btn btn-success" value="Valider">
+            <input type="submit" class="btn btn-success" value="Valider" ng-disabled="myForm.$invalid">
         </footer>
 
+        <p>* requis</p>
+
     </form>
+
+
 
     <section class="span5">
         <header class="page-header">
@@ -81,7 +92,7 @@
                 <td>{{user.email}}</td>
                 <td>{{user.arrival}}</td>
                 <td>{{user.night}}</td>
-                <td>?</td>
+                <td>{{55.65 * user.night}}</td>
             </tr>
             </tbody>
         </table>
