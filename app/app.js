@@ -12,4 +12,8 @@ formApp.controller('formController', function($scope){
         $scope.user = {};
     }
 
+    $scope.calculate = function(value){
+        $scope.user.total = 55.65 *value;
+    }
+
 });
