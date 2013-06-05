@@ -37,10 +37,10 @@
             <p class="help-block"></p>
         </div>
 
-        <div class="control-group">
+        <div class="control-group" ng-class="{error : myForm.arrival.$dirty && myForm.arrival.$error.required, success : myForm.arrival.$valid}">
             <label class="control-label">Date d'arrivée *</label>
             <input  name="arrival" type="date" ng-model="user.arrival" placeholder="jj/mm/aaaa" required>
-            <p class="help-block"></p>
+            <p class="help-block" ng-show="myForm.arrival.$dirty && myForm.arrival.$error.required">La date d'arrivée est obligatoire</p>
         </div>
 
         <div class="control-group" ng-class="{error: myForm.night.$error.min || myForm.night.$error.max }">
