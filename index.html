@@ -24,17 +24,18 @@
             <p class="help-block" ng-show="myForm.fullname.$dirty && myForm.fullname.$error.required">Le nom complet est requis</p>
         </div>
 
-        <div class="control-group" ng-class="{error : (myForm.email.$dirty && myForm.email.$error.email), success : myForm.email.$valid}">
+        <div class="control-group" ng-class="{error : (myForm.email.$dirty && (myForm.email.$error.email || myForm.email.$error.password)), success : myForm.email.$valid}">
             <label class="control-label">Email *</label>
             <input name="email" type="email" ng-model="user.email" required>
             <p class="help-block" ng-show="myForm.email.$error.email">Le format de votre email n'est pas valide</p>
-            <p class="help-block" ng-show=" myForm.email.$dirty && myForm.email.$error.required">Votre email est requis</p>
+            <p class="help-block" ng-show="myForm.email.$dirty && myForm.email.$error.required">Votre email est requis</p>
+            <p class="help-block" ng-show="myForm.email.$error.password">Les mots de passe saisis ne sont pas identiques</p>
         </div>
 
-        <div class="control-group">
+        <div class="control-group" ng-class="{error : (myForm.email2.$dirty && (myForm.email2.$error.email || myForm.email2.$error.password)), success : myForm.email2.$valid}">
             <label class="control-label">Confirmez email *</label>
-            <input name="email" type="email" ng-model="user.email2" required>
-            <p class="help-block"></p>
+            <input name="email2" type="email" ng-model="user.email2" required ng-change="checkPassword()">
+            <p class="help-block" ng-show="myForm.email2.$error.password">Les mots de passe saisis ne sont pas identiques</p>
         </div>
 
         <div class="control-group" ng-class="{error : myForm.arrival.$dirty && myForm.arrival.$error.required, success : myForm.arrival.$valid}">
@@ -45,7 +46,7 @@
 
         <div class="control-group" ng-class="{error: myForm.night.$error.min || myForm.night.$error.max }">
             <label class="control-label">Nombre de nuits * <p>55.65 € par nuit</p></label>
-            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required ng-change="calculate">
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required ng-change="calculate(user.night)">
             <p class="help-block" ng-show="myForm.night.$error.min">Vous devez réserver au moins une nuit</p>
             <p class="help-block" ng-show="myForm.night.$error.max">Vous ne pouvez pas réserver plus de 5 nuits</p>
         </div>
@@ -63,7 +64,7 @@
 
         <footer class="form-actions">
             <input type="reset" class="btn btn-danger btn-small" value="Réinitialiser">
-            <input type="submit" class="btn btn-success" value="Valider" ng-disabled="myForm.$invalid">
+            <input type="submit" class="btn btn-success" value="Valider">
         </footer>
 
         <p>* requis</p>
