@@ -21,10 +21,10 @@ a:hover{
     padding-top: 5px;
 }
 
-input.ng-valid {
+form input.ng-valid {
     border: 2px solid green;
 }
 
-input.ng-invalid {
+form input.ng-invalid {
     border-color: red;
 }

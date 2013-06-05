@@ -29,13 +29,13 @@
             <input name="email" type="email" ng-model="user.email" required>
             <p class="help-block" ng-show="myForm.email.$error.email">Le format de votre email n'est pas valide</p>
             <p class="help-block" ng-show="myForm.email.$dirty && myForm.email.$error.required">Votre email est requis</p>
-            <p class="help-block" ng-show="myForm.email.$error.password">Les mots de passe saisies ne sont pas identiques</p>
+            <p class="help-block" ng-show="myForm.email.$error.password">Les mots de passe saisis ne sont pas identiques</p>
         </div>
 
         <div class="control-group" ng-class="{error : (myForm.email2.$dirty && (myForm.email2.$error.email || myForm.email2.$error.password)), success : myForm.email2.$valid}">
             <label class="control-label">Confirmez email *</label>
             <input name="email2" type="email" ng-model="user.email2" required ng-change="checkPassword()">
-            <p class="help-block" ng-show="myForm.email2.$error.password">Les mots de passe saisies ne sont pas identiques</p>
+            <p class="help-block" ng-show="myForm.email2.$error.password">Les mots de passe saisis ne sont pas identiques</p>
         </div>
 
         <div class="control-group" ng-class="{error : myForm.arrival.$dirty && myForm.arrival.$error.required, success : myForm.arrival.$valid}">
