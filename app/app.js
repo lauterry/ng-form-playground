@@ -23,6 +23,34 @@ formApp.controller('formController', function($scope){
             arrival : '2013-05-14',
             night : 1,
             total : 45.35
+        },
+        {
+            fullname : 'Pierre Martin',
+            email : 'pierre.martin@yahoo.com',
+            arrival : '2012-04-30',
+            night : 3,
+            total : 166.95
+        },
+        {
+            fullname : 'Claire Dupont',
+            email : 'claire.dupont@gmail.com',
+            arrival : '2012-04-12',
+            night : 5,
+            total : 278.25
+        },
+        {
+            fullname : 'Pauline Wilson',
+            email : 'pauline.wilsons@gmail.com',
+            arrival : '2014-01-10',
+            night : 1,
+            total : 55.65
+        },
+        {
+            fullname : 'Pauline Wilson',
+            email : 'pauline.wilsons@gmail.com',
+            arrival : '2009-02-20',
+            night : 5,
+            total : 278.25
         }
     ];
 
