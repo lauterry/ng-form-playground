@@ -12,7 +12,7 @@
 
 <section class="row-fluid">
 
-    <form class="form-horizontal span5 offset1" name="myForm" ng-submit="confirm(user)">
+    <form class="form-horizontal span5" name="myForm" ng-submit="confirm(user)">
 
         <header class="page-header">
             <h3>Formulaire de réservation</h3>
@@ -24,22 +24,22 @@
         </div>
 
         <div class="control-group">
-            <label class="control-label">Email *</label>
+            <label class="control-label">Email</label>
             <input name="email" type="email" ng-model="user.email">
         </div>
 
         <div class="control-group">
-            <label class="control-label">Confirmez email *</label>
+            <label class="control-label">Confirmez email</label>
             <input name="email2" type="email" ng-model="user.email2">
         </div>
 
         <div class="control-group">
-            <label class="control-label">Date d'arrivée *</label>
+            <label class="control-label">Date d'arrivée</label>
             <input  name="arrival" type="date" ng-model="user.arrival" placeholder="jj/mm/aaaa">
         </div>
 
         <div class="control-group">
-            <label class="control-label">Nombre de nuits *</label>
+            <label class="control-label">Nombre de nuits</label>
             <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="0" max="5" ng-change="calculate(user.night)">
         </div>
 
@@ -62,7 +62,7 @@
 
     </form>
 
-    <section class="span5">
+    <section class="span7">
         <header class="page-header">
             <h3>Liste des inscrits <small>{{users.length}}</small></h3>
         </header>
