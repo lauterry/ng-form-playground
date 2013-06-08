@@ -4,11 +4,25 @@ formApp.controller('formController', function($scope){
 
     $scope.users = [
         {
-            fullname : 'Thierry Lau',
-            email : 'lau.t@sfeir.com',
+            fullname : 'Lau Thierry',
+            email : 'thierlau@gmail.com',
+            arrival : '2013-03-28',
+            night : 5,
+            total : 550.65
+        },
+        {
+            fullname : 'Letélié Sébastien',
+            email : 'sebastien.letelie@gmail.com',
             arrival : '2013-12-23',
-            night : 4,
-            total : 222.6
+            night : 3,
+            total : 345.70
+        },
+        {
+            fullname : 'Chatel Thierry',
+            email : 'tchatel@gmail.com',
+            arrival : '2013-05-14',
+            night : 1,
+            total : 45.35
         },
         {
             fullname : 'Pierre Martin',
