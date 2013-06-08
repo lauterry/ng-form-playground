@@ -12,49 +12,47 @@
 
 <section class="row-fluid">
 
-    <form novalidate class="form-horizontal span5 offset1" name="myForm" ng-submit="confirm(user)">
+    <form novalidate class="form-horizontal span5" name="myForm" ng-submit="confirm(user)">
 
         <header class="page-header">
             <h3>Formulaire de réservation</h3>
         </header>
 
-        <div class="control-group" ng-class="{error : myForm.fullname.$dirty && myForm.fullname.$error.required, success : myForm.fullname.$valid}">
+        <div class="control-group" ng-class="{error : myForm.fullname.$dirty && myForm.fullname.$error.required}">
             <label class="control-label">Nom et Prénom *</label>
             <input name="fullname" type="text" ng-model="user.fullname" required>
             <p class="help-block" ng-show="myForm.fullname.$dirty && myForm.fullname.$error.required">Le nom complet est requis</p>
         </div>
 
-        <div class="control-group" ng-class="{error : (myForm.email.$dirty && (myForm.email.$error.email || myForm.email.$error.password)), success : myForm.email.$valid}">
-            <label class="control-label">Email *</label>
-            <input name="email" type="email" ng-model="user.email" required>
+        <div class="control-group" ng-class="{error : myForm.email.$invalid}">
+            <label class="control-label">Email</label>
+            <input name="email" type="email" ng-model="user.email">
             <p class="help-block" ng-show="myForm.email.$error.email">Le format de votre email n'est pas valide</p>
-            <p class="help-block" ng-show="myForm.email.$dirty && myForm.email.$error.required">Votre email est requis</p>
-            <p class="help-block" ng-show="myForm.email.$error.password">Les mots de passe saisis ne sont pas identiques</p>
         </div>
 
-        <div class="control-group" ng-class="{error : (myForm.email2.$dirty && (myForm.email2.$error.email || myForm.email2.$error.password)), success : myForm.email2.$valid}">
-            <label class="control-label">Confirmez email *</label>
-            <input name="email2" type="email" ng-model="user.email2" required ng-change="checkPassword()">
+        <div class="control-group" ng-class="{error : myForm.email2.$invalid}">
+            <label class="control-label">Confirmez email</label>
+            <input name="email2" type="email" ng-model="user.email2" ng-change="checkPassword()">
             <p class="help-block" ng-show="myForm.email2.$error.password">Les mots de passe saisis ne sont pas identiques</p>
         </div>
 
-        <div class="control-group" ng-class="{error : myForm.arrival.$dirty && myForm.arrival.$error.required, success : myForm.arrival.$valid}">
+        <div class="control-group" ng-class="{error : myForm.arrival.$dirty && myForm.arrival.$error.required}">
             <label class="control-label">Date d'arrivée *</label>
             <input  name="arrival" type="date" ng-model="user.arrival" placeholder="jj/mm/aaaa" required>
             <p class="help-block" ng-show="myForm.arrival.$dirty && myForm.arrival.$error.required">La date d'arrivée est obligatoire</p>
         </div>
 
-        <div class="control-group" ng-class="{error: myForm.night.$error.min || myForm.night.$error.max }">
+        <div class="control-group" ng-class="{error:  myForm.night.$dirty && myForm.night.$invalid}">
             <label class="control-label">Nombre de nuits * <p>55.65 € par nuit</p></label>
             <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required ng-change="calculate(user.night)">
-            <p class="help-block" ng-show="myForm.night.$error.min">Vous devez réserver au moins une nuit</p>
+            <p class="help-block" ng-show="myForm.night.$error.min || (myForm.night.$error.required && myForm.dirty)">Vous devez réserver au moins une nuit</p>
             <p class="help-block" ng-show="myForm.night.$error.max">Vous ne pouvez pas réserver plus de 5 nuits</p>
         </div>
 
-        <div class="control-group" ng-class="{error : myForm.promocode.$error.maxlength}">
+        <div class="control-group" ng-class="{error : myForm.comment.$error.maxlength}">
             <label class="control-label">Commentaires</label>
-            <textarea name="promocode" type="text" ng-model="user.promocode" ng-maxlength="10"></textarea>
-            <p class="help-block" ng-show="myForm.promocode.$error.maxlength">Votre commentaire doit comporter moins de 50 caractères</p>
+            <textarea name="comment" type="text" ng-model="user.comment" ng-maxlength="50"></textarea>
+            <p class="help-block" ng-show="myForm.comment.$error.maxlength">Votre commentaire doit comporter moins de 50 caractères</p>
         </div>
 
         <div class="control-group">
@@ -71,9 +69,7 @@
 
     </form>
 
-
-
-    <section class="span5">
+    <section class="span7">
         <header class="page-header">
             <h3>Liste des inscrits <small>{{users.length}}</small></h3>
         </header>
@@ -105,6 +101,7 @@
 </section>
 
 <script type="text/javascript" src="app/lib/angular.js"></script>
+<script type="text/javascript" src="app/lib/angular-locale_fr-fr.js"></script>
 <script type="text/javascript" src="app/app.js"></script>
 
 </body>
