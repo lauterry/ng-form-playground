@@ -2,15 +2,15 @@ var formApp = angular.module('formApp', []);
 
 formApp.controller('formController', function($scope, $http){
 
-    $http.get('server/api/users')
+    $http.get('/server/api/users')
         .success(function(data){
             $scope.users = data.users;
         });
 
-    $scope.confirm = function(user){
 
-        $http.post('server/api/users', user)
-            .success(function(data){
+    $scope.confirm = function(user){
+        $http.post('/server/api/users', user)
+            .success(function(){
                 $scope.users.push(user);
                 // only available from angularjs 1.1.1
                 // https://github.com/angular/angular.js/pull/1127
@@ -20,7 +20,7 @@ formApp.controller('formController', function($scope, $http){
     }
 
     $scope.calculate = function(value){
-        $scope.user.total = 55.65 * value;
+        $scope.user.total = 55.65 *value;
     }
 
     $scope.checkPassword = function(){
@@ -33,18 +33,3 @@ formApp.controller('formController', function($scope, $http){
         }
     }
 });
-
-formApp.filter('moon', function(){
-
-    var MOON = {
-        1 : '\u263D',
-        2 : '\u263D\u263D',
-        3 : '\u263D\u263D\u263D',
-        4 : '\u263D\u263D\u263D\u263D',
-        5 : '\u263D\u263D\u263D\u263D\u263D'
-    }
-
-    return function(value){
-        return MOON[value];
-    }
-})
