@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>ngFormPlayground</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body class="container-fluid" ng-controller="formController">
+
+<section class="row-fluid">
+
+    <form novalidate class="form-horizontal span5" name="myForm" ng-submit="confirm(user)">
+
+        <header class="page-header">
+            <h3>Formulaire de réservation</h3>
+        </header>
+
+        <div class="control-group" ng-class="{error : myForm.fullname.$dirty && myForm.fullname.$error.required}">
+            <label class="control-label">Nom et Prénom *</label>
+            <input name="fullname" type="text" ng-model="user.fullname" required>
+            <p class="help-block" ng-show="myForm.fullname.$dirty && myForm.fullname.$error.required">Le nom complet est requis</p>
+        </div>
+
+        <div class="control-group" ng-class="{error : myForm.email.$invalid}">
+            <label class="control-label">Email</label>
+            <input name="email" type="email" ng-model="user.email">
+            <p class="help-block" ng-show="myForm.email.$error.email">Le format de votre email n'est pas valide</p>
+        </div>
+
+        <div class="control-group" ng-class="{error : myForm.email2.$invalid}">
+            <label class="control-label">Confirmez email</label>
+            <input name="email2" type="email" ng-model="user.email2" ng-change="checkEmail()">
+            <p class="help-block" ng-show="myForm.email2.$error.samemail">Les mots de passe saisis ne sont pas identiques</p>
+        </div>
+
+        <div class="control-group" ng-class="{error : myForm.arrival.$dirty && myForm.arrival.$error.required}">
+            <label class="control-label">Date d'arrivée *</label>
+            <input  name="arrival" type="date" ng-model="user.arrival" placeholder="jj/mm/aaaa" required>
+            <p class="help-block" ng-show="myForm.arrival.$dirty && myForm.arrival.$error.required">La date d'arrivée est obligatoire</p>
+        </div>
+
+        <div class="control-group" ng-class="{error:  myForm.night.$dirty && myForm.night.$invalid}">
+            <label class="control-label">Nombre de nuits * <p>55.65 € par nuit</p></label>
+            <input name="night" type="number" ng-model="user.night" placeholder="5 nuits maximum" min="1" max="5" required ng-change="calculate(user.night)">
+            <p class="help-block" ng-show="myForm.night.$error.min || (myForm.night.$error.required && myForm.dirty)">Vous devez réserver au moins une nuit</p>
+            <p class="help-block" ng-show="myForm.night.$error.max">Vous ne pouvez pas réserver plus de 5 nuits</p>
+        </div>
+
+        <div class="control-group" ng-class="{error : myForm.comment.$error.maxlength}">
+            <label class="control-label">Commentaires</label>
+            <textarea name="comment" type="text" ng-model="user.comment" ng-maxlength="50"></textarea>
+            <p class="help-block" ng-show="myForm.comment.$error.maxlength">Votre commentaire doit comporter moins de 50 caractères</p>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label"><strong>Prix : </strong></label>
+            <div ng-show="user.night">{{user.total}}</div>
+        </div>
+
+        <footer class="form-actions">
+            <input type="reset" class="btn btn-danger btn-small" value="Réinitialiser">
+            <input type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" value="Valider">
+        </footer>
+
+        <p>* requis</p>
+
+    </form>
+
+    <section class="span7">
+        <header class="page-header">
+            <h3>Liste des inscrits <small>{{users.length}}</small></h3>
+        </header>
+
+        <input class="span5" type="text" placeholder="Rechercher" ng-model="search">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th><a ng-click="tri = 'fullname'; reverse = !reverse">Nom et Prénom</a></th>
+                <th><a ng-click="tri = 'email'; reverse = !reverse">Email</a></th>
+                <th><a ng-click="tri = 'arrival'; reverse = !reverse">Date d'arrivée</a></th>
+                <th><a ng-click="tri = 'night'; reverse = !reverse">Nombre de nuits</a></th>
+                <th><a ng-click="tri = 'total'; reverse = !reverse">Total</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users | filter:search | orderBy:tri:reverse">
+                <td>{{user.fullname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.arrival | date:'mediumDate'}}</td>
+                <td>{{user.night | moon}}</td>
+                <td>{{user.total | currency}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+<script type="text/javascript" src="js/lib/angular.js"></script>
+<script type="text/javascript" src="js/lib/angular-locale_fr-fr.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+</body>
+</html>
