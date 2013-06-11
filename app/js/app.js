@@ -23,13 +23,13 @@ formApp.controller('formController', function($scope, $http){
         $scope.user.total = 55.65 *value;
     }
 
-    $scope.checkPassword = function(){
+    $scope.checkEmail = function(){
         if($scope.user.email === $scope.user.email2){
-            $scope.myForm.email.$setValidity('password', true);
-            $scope.myForm.email2.$setValidity('password', true);
+            $scope.myForm.email.$setValidity('samemail', true);
+            $scope.myForm.email2.$setValidity('samemail', true);
         } else {
-            $scope.myForm.email.$setValidity('password', false);
-            $scope.myForm.email2.$setValidity('password', false);
+            $scope.myForm.email.$setValidity('samemail', false);
+            $scope.myForm.email2.$setValidity('samemail', false);
         }
     }
 });
